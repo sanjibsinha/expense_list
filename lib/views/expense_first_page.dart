@@ -53,7 +53,7 @@ class ExpenseFirstPage extends StatelessWidget {
                       children: [
                         Card(
                           child: Text(
-                            'Item: ${expense.title}',
+                            '${expense.title}',
                             style: Theme.of(context).textTheme.headline5,
                           ),
                           elevation: 10,
@@ -64,7 +64,7 @@ class ExpenseFirstPage extends StatelessWidget {
                         Card(
                           child: Text('${expense.date.toString()}',
                               style: TextStyle(
-                                fontSize: 15.0,
+                                fontSize: 12.0,
                                 fontWeight: FontWeight.bold,
                               )),
                           elevation: 10,
@@ -78,6 +78,14 @@ class ExpenseFirstPage extends StatelessWidget {
                       ),
                       elevation: 10,
                     ),
+                    Expanded(
+                      child: Text(
+                        ' -> DELETE',
+                        softWrap: false,
+                        overflow: TextOverflow.fade,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    )
                   ],
                 ),
               );
