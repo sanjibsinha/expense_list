@@ -22,7 +22,8 @@ class ExpenseFirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
+      child: ListView(
+        padding: EdgeInsets.all(8),
         children: [
           Container(
             width: double.infinity,
@@ -37,11 +38,36 @@ class ExpenseFirstPage extends StatelessWidget {
               elevation: 10,
             ),
           ),
-          Card(
-            child: Text('Expense List'),
-          )
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: expenseList.map((expense) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(Icons.insert_emoticon_rounded),
+                  Card(
+                    child: Text(
+                      'Item: ${expense.title}',
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    elevation: 10,
+                  ),
+                  Card(
+                    child: Text(
+                      'Expense: ${expense.amount.toString()}',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    elevation: 10,
+                  ),
+                ],
+              );
+            }).toList(),
+          ),
         ],
       ),
     );
   }
 }
+/**
+ * 
+ */
