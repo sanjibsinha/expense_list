@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:expense_list/models/expense_list.dart';
+import 'package:flutter/src/widgets/container.dart';
 
 class ExpenseFirstPage extends StatelessWidget {
   ExpenseFirstPage({Key key}) : super(key: key);
@@ -41,25 +42,44 @@ class ExpenseFirstPage extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: expenseList.map((expense) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(Icons.insert_emoticon_rounded),
-                  Card(
-                    child: Text(
-                      'Item: ${expense.title}',
-                      style: Theme.of(context).textTheme.headline5,
+              return Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.all(5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(Icons.insert_emoticon_rounded),
+                    Column(
+                      children: [
+                        Card(
+                          child: Text(
+                            'Item: ${expense.title}',
+                            style: Theme.of(context).textTheme.headline5,
+                          ),
+                          elevation: 10,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Card(
+                          child: Text('${expense.date.toString()}',
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              )),
+                          elevation: 10,
+                        ),
+                      ],
                     ),
-                    elevation: 10,
-                  ),
-                  Card(
-                    child: Text(
-                      'Expense: ${expense.amount.toString()}',
-                      style: Theme.of(context).textTheme.headline6,
+                    Card(
+                      child: Text(
+                        '${expense.amount.toString()}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                      elevation: 10,
                     ),
-                    elevation: 10,
-                  ),
-                ],
+                  ],
+                ),
               );
             }).toList(),
           ),
