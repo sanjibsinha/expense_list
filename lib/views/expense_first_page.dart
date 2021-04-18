@@ -11,20 +11,7 @@ class ExpenseFirstPage extends StatefulWidget {
 }
 
 class _ExpenseFirstPageState extends State<ExpenseFirstPage> {
-  final List<ExpenseList> expenseList = [
-    ExpenseList(
-      id: '1',
-      title: 'Fruits',
-      amount: 200.00,
-      date: DateTime.now(),
-    ),
-    ExpenseList(
-      id: '2',
-      title: 'Vegetables',
-      amount: 200.08,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<ExpenseList> expenseList = [];
 
   void addTaskAndAmount(String title, double amount) {
     final expense = ExpenseList(
@@ -35,6 +22,12 @@ class _ExpenseFirstPageState extends State<ExpenseFirstPage> {
     );
     setState(() {
       expenseList.add(expense);
+    });
+  }
+
+  void deleteExpenseList(String id) {
+    setState(() {
+      expenseList.removeWhere((element) => element.id == id);
     });
   }
 
@@ -55,32 +48,33 @@ class _ExpenseFirstPageState extends State<ExpenseFirstPage> {
           ),
           Container(
             child: Card(
-                elevation: 10,
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: titleController,
-                    ),
-                    TextField(
-                      controller: amountController,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        addTaskAndAmount(
-                          titleController.text,
-                          double.parse(amountController.text),
-                        );
-                      },
-                      child: Text(
-                        'SUBMIT',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+              elevation: 10,
+              child: Column(
+                children: [
+                  TextField(
+                    controller: titleController,
+                  ),
+                  TextField(
+                    controller: amountController,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      addTaskAndAmount(
+                        titleController.text,
+                        double.parse(amountController.text),
+                      );
+                    },
+                    child: Text(
+                      'SUBMIT',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            ),
           ),
           Container(
             child: Column(
@@ -99,7 +93,7 @@ class _ExpenseFirstPageState extends State<ExpenseFirstPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        print('object');
+                        deleteExpenseList(e.id);
                       },
                       child: Text(
                         'DELETE',
