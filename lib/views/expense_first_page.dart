@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../models/expense_list.dart';
+import '../controllers/display_task_and_data.dart';
+import '../controllers/display_amount.dart';
 
-class ExpenseFirstPage extends StatelessWidget {
+class ExpenseFirstPage extends StatefulWidget {
   ExpenseFirstPage({Key key}) : super(key: key);
 
+  @override
+  _ExpenseFirstPageState createState() => _ExpenseFirstPageState();
+}
+
+class _ExpenseFirstPageState extends State<ExpenseFirstPage> {
   final List<ExpenseList> expenseList = [
     ExpenseList(
       id: '1',
@@ -20,6 +26,21 @@ class ExpenseFirstPage extends StatelessWidget {
     ),
   ];
 
+  void addTaskAndAmount(String title, double amount) {
+    final expense = ExpenseList(
+      id: DateTime.now().toString(),
+      title: title,
+      amount: amount,
+      date: DateTime.now(),
+    );
+    setState(() {
+      expenseList.add(expense);
+    });
+  }
+
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -33,10 +54,39 @@ class ExpenseFirstPage extends StatelessWidget {
             ),
           ),
           Container(
+            child: Card(
+                elevation: 10,
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: titleController,
+                    ),
+                    TextField(
+                      controller: amountController,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        addTaskAndAmount(
+                          titleController.text,
+                          double.parse(amountController.text),
+                        );
+                      },
+                      child: Text(
+                        'SUBMIT',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+          ),
+          Container(
             child: Column(
               children: expenseList.map((e) {
                 return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Card(
                       elevation: 10,
@@ -45,6 +95,18 @@ class ExpenseFirstPage extends StatelessWidget {
                           displayAmount(e),
                           displayTaskAndDate(e),
                         ],
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        print('object');
+                      },
+                      child: Text(
+                        'DELETE',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25,
+                        ),
                       ),
                     ),
                   ],
@@ -56,72 +118,4 @@ class ExpenseFirstPage extends StatelessWidget {
       ),
     );
   }
-
-  Column displayTaskAndDate(ExpenseList e) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: EdgeInsets.all(5),
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.blue[100],
-            border: Border.all(
-              color: Colors.red,
-              width: 5,
-            ),
-          ),
-          child: Card(
-            child: Text(
-              '${e.title}',
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  backgroundColor: Colors.blue[100]),
-            ),
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.all(2),
-          padding: EdgeInsets.all(5),
-          child: Card(
-            child: Text(
-              DateFormat('yyyy/MM/dd').format(e.date),
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.normal,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Container displayAmount(ExpenseList e) {
-    return Container(
-      margin: EdgeInsets.all(8),
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: Colors.yellow[100],
-        border: Border.all(
-          color: Colors.red,
-          width: 5,
-        ),
-      ),
-      child: Card(
-        child: Text(
-          '\$${e.amount}',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
 }
-/**
- * 
- */
