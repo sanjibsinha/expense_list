@@ -37,15 +37,8 @@ class _ExpenseFirstPageState extends State<ExpenseFirstPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: ListView(
-        padding: EdgeInsets.all(8),
+      child: Column(
         children: [
-          Container(
-            child: Card(
-              child: Text('Chart'),
-              elevation: 10,
-            ),
-          ),
           Container(
             child: Card(
               elevation: 10,

@@ -24,7 +24,32 @@ class ExpensePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Expense List'),
       ),
-      body: ExpenseFirstPage(),
+      body: ExpenseList(),
+    );
+  }
+}
+
+class ExpenseList extends StatelessWidget {
+  const ExpenseList({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Container(
+          child: Card(
+            child: Text(
+              'Submit your expenses',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            elevation: 10,
+          ),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        ExpenseFirstPage(),
+      ],
     );
   }
 }
