@@ -9,7 +9,7 @@ import 'package:expense_list/views/material_and_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:expense_list/main.dart';
+//import 'package:expense_list/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

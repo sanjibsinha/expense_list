@@ -45,9 +45,25 @@ class _ExpenseFirstPageState extends State<ExpenseFirstPage> {
               child: Column(
                 children: [
                   TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'ITEM',
+                      suffixStyle: TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     controller: titleController,
                   ),
                   TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'AMOUNT',
+                      suffixStyle: TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     controller: amountController,
                   ),
                   TextButton(
